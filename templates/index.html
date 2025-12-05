@@ -7,103 +7,161 @@
 
 <body>
 <div class="container">
-    <h1>Multi Disease Prediction</h1>
 
-    <form method="POST" action="/predict">
+    <!-- LEFT PANEL: REFERENCE INFORMATION -->
+    <div class="left-panel">
+        <h2>Reference Ranges</h2>
 
-        <label>Disease Type</label>
-        <select id="disease" name="disease" onchange="updateFields()">
-            <option value="diabetes">Diabetes</option>
-            <option value="heart">Heart Disease</option>
-            <option value="kidney">Kidney Disease</option>
-        </select>
+        <h3>Diabetes</h3>
+        <ul>
+            <li><b>Pregnancies:</b> 0–15</li>
+            <li><b>Glucose:</b> Normal 70–130, High &gt; 140</li>
+            <li><b>Blood Pressure:</b> Normal 80–120</li>
+            <li><b>Skin Thickness:</b> 10–50 mm</li>
+            <li><b>Insulin:</b> 15–276 uU/ml</li>
+            <li><b>BMI:</b> Healthy 18.5–24.9</li>
+            <li><b>Diabetes Pedigree Function:</b> 0.1–2.5</li>
+            <li><b>Age:</b> 20–80</li>
+        </ul>
 
-        <!------ DIABETES ---------------- -->
-        <div id="diabetes-fields" class="fields">
-            <!--
-            <input type="number" name="Pregnancies" placeholder="Pregnancies" required>
-            <input type="number" name="Glucose" placeholder="Glucose" required>
-            <input type="number" name="BloodPressure" placeholder="Blood Pressure" required>
-            <input type="number" name="SkinThickness" placeholder="Skin Thickness" required>
-            <input type="number" name="Insulin" placeholder="Insulin Level" required>
-            <input type="number" step="0.1" name="BMI" placeholder="BMI" required>
-            <input type="number" step="0.001" name="DiabetesPedigreeFunction" placeholder="Diabetes Pedigree Function" required>
-            <input type="number" name="Age" placeholder="Age" required>
-            -->
-            <input type="number" name="Pregnancies" placeholder="Pregnancies">
-            <input type="number" name="Glucose" placeholder="Glucose">
-            <input type="number" name="BloodPressure" placeholder="Blood Pressure">
-            <input type="number" name="SkinThickness" placeholder="Skin Thickness">
-            <input type="number" name="Insulin" placeholder="Insulin Level">
-            <input type="number" step="0.1" name="BMI" placeholder="BMI">
-             <input type="number" step="0.001" name="DiabetesPedigreeFunction" placeholder="Diabetes Pedigree Function">
-            <input type="number" name="Age" placeholder="Age">
+        <h3>Heart Disease</h3>
+        <ul>
+            <li><b>Age:</b> 20–90</li>
+            <li><b>Sex:</b> 0 = Female, 1 = Male</li>
+            <li><b>Chest Pain Type:</b> 0–3 (Encoded)</li>
+            <li><b>Resting BP:</b> 90–140</li>
+            <li><b>Cholesterol:</b> 150–300</li>
+            <li><b>Fasting Blood Sugar:</b> 0/1</li>
+            <li><b>Rest ECG:</b> 0–2</li>
+            <li><b>Max Heart Rate:</b> 70–200</li>
+            <li><b>Exercise Angina:</b> 0/1</li>
+            <li><b>ST Depression:</b> 0.0–6.0</li>
+            <li><b>Slope:</b> 0–2</li>
+            <li><b>Major Vessels:</b> 0–3</li>
+            <li><b>Thal:</b> 0–3</li>
+        </ul>
 
-        </div>
+        <h3>Kidney Disease</h3>
+        <ul>
+            <li><b>Age:</b> 20–90</li>
+            <li><b>Blood Pressure:</b> 60–140</li>
+            <li><b>Specific Gravity:</b> 1.005–1.025</li>
+            <li><b>Albumin:</b> 0–5</li>
+            <li><b>Sugar:</b> 0–5</li>
+            <li><b>RBC:</b> 0/1</li>
+            <li><b>Pus Cell:</b> 0/1</li>
+            <li><b>Pus Cell Clumps:</b> 0/1</li>
+            <li><b>Bacteria:</b> 0/1</li>
+            <li><b>Blood Glucose Random:</b> 70–200</li>
+            <li><b>Blood Urea:</b> 10–50</li>
+            <li><b>Serum Creatinine:</b> 0.6–1.5</li>
+            <li><b>Sodium:</b> 130–155</li>
+            <li><b>Potassium:</b> 3.5–5.5</li>
+            <li><b>Hemoglobin:</b> 11–15</li>
+            <li><b>Packed Cell Volume:</b> 30–50</li>
+            <li><b>WBC Count:</b> 4000–11000</li>
+            <li><b>RBC Count:</b> 3.5–5.5</li>
+            <li><b>Hypertension:</b> 0/1</li>
+            <li><b>Diabetes Mellitus:</b> 0/1</li>
+            <li><b>Coronary Artery Disease:</b> 0/1</li>
+            <li><b>Appetite:</b> 0/1</li>
+            <li><b>Pedal Edema:</b> 0/1</li>
+            <li><b>Anemia:</b> 0/1</li>
+        </ul>
+    </div>
+        <!-- RIGHT PANEL: FORM -->
+    <div class="right-panel">
 
-        <!-- ------- HEART ---------------- -->
-        <div id="heart-fields" class="fields">
-            <input type="number" name="age" placeholder="Age" required>
-            <input type="number" name="sex" placeholder="Sex (0 = Female, 1 = Male)" required>
-            <input type="number" name="dataset" placeholder="Dataset (Encoded)" required>
-            <input type="number" name="cp" placeholder="Chest Pain Type (Encoded)" required>
-            <input type="number" name="trestbps" placeholder="Resting BP" required>
-            <input type="number" name="chol" placeholder="Cholesterol" required>
-            <input type="number" name="fbs" placeholder="Fasting Blood Sugar (0/1)" required>
-            <input type="number" name="restecg" placeholder="Rest ECG (Encoded)" required>
-            <input type="number" name="thalch" placeholder="Max Heart Rate" required>
-            <input type="number" name="exang" placeholder="Exercise Angina (0/1)" required>
-            <input type="number" step="0.1" name="oldpeak" placeholder="ST Depression" required>
-            <input type="number" name="slope" placeholder="Slope (Encoded)" required>
-            <input type="number" name="ca" placeholder="Major Vessels Count" required>
-            <input type="number" name="thal" placeholder="Thal (Encoded)" required>
-        </div>
+        <h1>Multi Disease Prediction</h1>
 
-        <!-- -------- KIDNEY ---------->
-        <div id="kidney-fields" class="fields">
-            <input type="number" name="age" placeholder="Age" required>
-            <input type="number" name="bp" placeholder="Blood Pressure" required>
-            <input type="number" step="0.001" name="sg" placeholder="Specific Gravity" required>
-            <input type="number" name="al" placeholder="Albumin" required>
-            <input type="number" name="su" placeholder="Sugar" required>
-            <input type="number" name="rbc" placeholder="RBC (Encoded)" required>
-            <input type="number" name="pc" placeholder="Pus Cell (Encoded)" required>
-            <input type="number" name="pcc" placeholder="Pus Cell Clumps (0/1)" required>
-            <input type="number" name="ba" placeholder="Bacteria (0/1)" required>
-            <input type="number" name="bgr" placeholder="Blood Glucose Random" required>
-            <input type="number" name="bu" placeholder="Blood Urea" required>
-            <input type="number" name="sc" placeholder="Serum Creatinine" required>
-            <input type="number" name="sod" placeholder="Sodium" required>
-            <input type="number" name="pot" placeholder="Potassium" required>
-            <input type="number" name="hemo" placeholder="Hemoglobin" required>
-            <input type="number" name="pcv" placeholder="Packed Cell Volume" required>
-            <input type="number" name="wc" placeholder="White Blood Cell Count" required>
-            <input type="number" name="rc" placeholder="Red Blood Cell Count" required>
-            <input type="number" name="htn" placeholder="Hypertension (0/1)" required>
-            <input type="number" name="dm" placeholder="Diabetes Mellitus (0/1)" required>
-            <input type="number" name="cad" placeholder="Coronary Artery Disease (0/1)" required>
-            <input type="number" name="appet" placeholder="Appetite (Encoded)" required>
-            <input type="number" name="pe" placeholder="Pedal Edema (0/1)" required>
-            <input type="number" name="ane" placeholder="Anemia (0/1)" required>
-        </div>
+        <!-- <form method="POST" action="/predict"> -->
+        <form id="disease-form" onsubmit="event.preventDefault(); predict();">
 
-        <button type="submit">Predict</button>
-    </form>
+
+
+            <label>Disease Type</label>
+            <select id="disease" name="disease" onchange="updateFields()">
+                <option value="diabetes">Diabetes</option>
+                <option value="heart">Heart Disease</option>
+                <option value="kidney">Kidney Disease</option>
+            </select>
+
+            <!------ DIABETES ---------------- -->
+            <div id="diabetes-fields" class="fields">
+                <!--
+                <input type="number" name="Pregnancies" placeholder="Pregnancies" required>
+                <input type="number" name="Glucose" placeholder="Glucose" required>
+                <input type="number" name="BloodPressure" placeholder="Blood Pressure" required>
+                <input type="number" name="SkinThickness" placeholder="Skin Thickness" required>
+                <input type="number" name="Insulin" placeholder="Insulin Level" required>
+                <input type="number" step="0.1" name="BMI" placeholder="BMI" required>
+                <input type="number" step="0.001" name="DiabetesPedigreeFunction" placeholder="Diabetes Pedigree Function" required>
+                <input type="number" name="Age" placeholder="Age" required>
+                -->
+                <input type="number" name="Pregnancies" placeholder="Pregnancies">
+                <input type="number" name="Glucose" placeholder="Glucose">
+                <input type="number" name="BloodPressure" placeholder="Blood Pressure">
+                <input type="number" name="SkinThickness" placeholder="Skin Thickness">
+                <input type="number" name="Insulin" placeholder="Insulin Level">
+                <input type="number" step="0.1" name="BMI" placeholder="BMI">
+                 <input type="number" step="0.001" name="DiabetesPedigreeFunction" placeholder="Diabetes Pedigree Function">
+                <input type="number" name="Age" placeholder="Age">
+
+            </div>
+
+            <!-- ------- HEART ---------------- -->
+            <div id="heart-fields" class="fields">
+                <input type="number" name="age" placeholder="Age" required>
+                <input type="number" name="sex" placeholder="Sex (0 = Female, 1 = Male)" required>
+                <input type="number" name="dataset" placeholder="Dataset (Encoded)" required>
+                <input type="number" name="cp" placeholder="Chest Pain Type (Encoded)" required>
+                <input type="number" name="trestbps" placeholder="Resting BP" required>
+                <input type="number" name="chol" placeholder="Cholesterol" required>
+                <input type="number" name="fbs" placeholder="Fasting Blood Sugar (0/1)" required>
+                <input type="number" name="restecg" placeholder="Rest ECG (Encoded)" required>
+                <input type="number" name="thalch" placeholder="Max Heart Rate" required>
+                <input type="number" name="exang" placeholder="Exercise Angina (0/1)" required>
+                <input type="number" step="0.1" name="oldpeak" placeholder="ST Depression" required>
+                <input type="number" name="slope" placeholder="Slope (Encoded)" required>
+                <input type="number" name="ca" placeholder="Major Vessels Count" required>
+                <input type="number" name="thal" placeholder="Thal (Encoded)" required>
+            </div>
+
+            <!-- -------- KIDNEY ---------->
+            <div id="kidney-fields" class="fields">
+                <input type="number" name="age" placeholder="Age" required>
+                <input type="number" name="bp" placeholder="Blood Pressure" required>
+                <input type="number" step="0.001" name="sg" placeholder="Specific Gravity" required>
+                <input type="number" name="al" placeholder="Albumin" required>
+                <input type="number" name="su" placeholder="Sugar" required>
+                <input type="number" name="rbc" placeholder="RBC (Encoded)" required>
+                <input type="number" name="pc" placeholder="Pus Cell (Encoded)" required>
+                <input type="number" name="pcc" placeholder="Pus Cell Clumps (0/1)" required>
+                <input type="number" name="ba" placeholder="Bacteria (0/1)" required>
+                <input type="number" name="bgr" placeholder="Blood Glucose Random" required>
+                <input type="number" name="bu" placeholder="Blood Urea" required>
+                <input type="number" name="sc" placeholder="Serum Creatinine" required>
+                <input type="number" name="sod" placeholder="Sodium" required>
+                <input type="number" name="pot" placeholder="Potassium" required>
+                <input type="number" name="hemo" placeholder="Hemoglobin" required>
+                <input type="number" name="pcv" placeholder="Packed Cell Volume" required>
+                <input type="number" name="wc" placeholder="White Blood Cell Count" required>
+                <input type="number" name="rc" placeholder="Red Blood Cell Count" required>
+                <input type="number" name="htn" placeholder="Hypertension (0/1)" required>
+                <input type="number" name="dm" placeholder="Diabetes Mellitus (0/1)" required>
+                <input type="number" name="cad" placeholder="Coronary Artery Disease (0/1)" required>
+                <input type="number" name="appet" placeholder="Appetite (Encoded)" required>
+                <input type="number" name="pe" placeholder="Pedal Edema (0/1)" required>
+                <input type="number" name="ane" placeholder="Anemia (0/1)" required>
+            </div>
+
+            <button type="submit">Predict</button>
+        </form>
+        <div id="result-box" class="result-box"></div>
+    </div>
+
 </div>
 
-<!--
-<script>
-function updateFields() {
-    document.querySelectorAll('.fields').forEach(f => f.style.display = "none");
-    const d = document.getElementById("disease").value;
-
-    if (d === "diabetes") document.getElementById("diabetes-fields").style.display = "block";
-    if (d === "heart") document.getElementById("heart-fields").style.display = "block";
-    if (d === "kidney") document.getElementById("kidney-fields").style.display = "block";
-}
-window.onload = updateFields;
-</script>
--->
 
 <script>
 function updateFields() {
@@ -140,6 +198,28 @@ function updateFields() {
 
 // Run on page load
 window.onload = updateFields;
+</script>
+
+<script>
+function predict() {
+    let formData = new FormData(document.getElementById("disease-form"));
+
+    fetch("/predict", {
+        method: "POST",
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        document.getElementById("result-box").innerHTML = `
+            <h3>${data.result}</h3>
+            <p><strong>Probability:</strong> ${(data.prob * 100).toFixed(2)}%</p>
+        `;
+    })
+    .catch(err => {
+        document.getElementById("result-box").innerHTML = "<p style='color:red;'>Error occurred!</p>";
+        console.error(err);
+    });
+}
 </script>
 
 </body>

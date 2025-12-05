@@ -73,7 +73,11 @@ def predict():
         # save to database
         save_log("diabetes", feats, risk, p)
 
-        return f"Diabetes Prediction: {risk}"
+        #return f"Diabetes Prediction: {risk} (Confidence: {p:.4f})"
+        return jsonify({
+            "result": f"Diabetes Prediction: {risk}",
+            "prob": float(p)
+        })
 
     # --------------- HEART ---------------------
     if disease == "heart":
@@ -100,15 +104,31 @@ def predict():
         # save to database
         save_log("heart", feats, risk, p)
 
-        return f"Heart Disease Prediction: {risk}"
+        #return f"Heart Disease Prediction: {risk} (Confidence: {p:.4f})"
+        return jsonify({
+            "result": f"Heart Disease Prediction: {risk}",
+            "prob": float(p)
+        })
 
     # -------------------- KIDNEY --------------------------
     if disease == "kidney":
+        kidney_cols = [
+            'age', 'bp', 'sg', 'al', 'su', 'rbc', 'pc', 'pcc', 'ba', 'bgr', 'bu',
+            'sc', 'sod', 'pot', 'hemo', 'pcv', 'wc', 'rc', 'htn', 'dm', 'cad',
+            'appet', 'pe', 'ane'
+        ]
+
         feats = []
-        for col in ['age','bp','sg','al','su','rbc','pc','pcc','ba','bgr','bu','sc',
-                    'sod','pot','hemo','pcv','wc','rc','htn','dm','cad',
-                    'appet','pe','ane']:
-            feats.append(float(request.form[col]))
+        for col in kidney_cols:
+            raw = request.form.get(col)
+            print(col, "=>", raw)  # DEBUG
+
+            if raw is None or raw.strip() == "":
+                raw = "0"
+
+            feats.append(float(raw))
+
+        feats = np.array(feats).reshape(1, -1)
 
         feats = np.array(feats).reshape(1, -1)
         p = kidney_model.predict_proba(kidney_scaler.transform(feats))[0][1]
@@ -117,9 +137,14 @@ def predict():
         # save to database
         save_log("kidney", feats, risk, p)
 
-        return f"Kidney Disease Prediction: {risk}"
+        #return f"Kidney Disease Prediction: {risk} (Confidence: {p:.4f})"
+        return jsonify({
+            "result": f"Kidney Disease Prediction: {risk}",
+            "prob": float(p)
+        })
 
-    return "Invalid request"
+    #return "Invalid request"
+    return jsonify({"result": "Invalid request", "prob": 0})
 
 
 # -----------------------------------

@@ -3,7 +3,7 @@ body {
     background: #e9f0ff;
     padding: 30px;
 }
-
+/*
 .container {
     width: 40%;
     margin: auto;
@@ -11,6 +11,46 @@ body {
     padding: 25px;
     border-radius: 8px;
 }
+*/
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    display: flex;
+    gap: 20px;
+}
+/*
+.left-panel {
+    width: 30%;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px #ccc;
+    overflow-y: auto;
+    max-height: 90vh;
+}*/
+
+.left-panel {
+    position: sticky;
+    top: 20px;
+    max-height: 90vh;
+    overflow-y: auto;
+    width: 320px;
+    padding: 15px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 0 12px rgba(0,0,0,0.15);
+
+}
+
+.right-panel {
+    width: 70%;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px #ccc;
+}
+
 
 input, select {
     width: 100%;
@@ -33,5 +73,13 @@ button {
 
 h1 {
     color: #064f9c;
+}
+.result-box {
+    margin-top: 20px;
+    padding: 15px;
+    background: #eef4ff;
+    border-left: 4px solid #003f91;
+    border-radius: 5px;
+    font-size: 18px;
 }
 
