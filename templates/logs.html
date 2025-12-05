@@ -31,6 +31,10 @@
 <body>
     <div class="container table-container">
         <h2>📄 Prediction Logs</h2>
+        <div style="text-align:right; margin-bottom:15px;">
+             <a href="/" class="btn btn-primary"> Back to Home</a>
+        </div>
+
 
         <table class="table table-striped table-bordered">
             <thead class="table-dark">
@@ -52,7 +56,7 @@
                     <td>{{ row.disease }}</td>
                     <td><pre>{{ row.inputs }}</pre></td>
                     <td>{{ row.prediction }}</td>
-                    <td>{{ row.confidence }}</td>
+                    <td>{{ (row.confidence * 100) | round(2) }}%</td>
                 </tr>
                 {% endfor %}
             </tbody>

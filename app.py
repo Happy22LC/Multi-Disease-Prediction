@@ -147,19 +147,8 @@ def predict():
     return jsonify({"result": "Invalid request", "prob": 0})
 
 
-# -----------------------------------
 # logs ROUTE
-# -----------------------------------
-"""""
-@app.route('/logs')
-def show_logs():
-    conn = sqlite3.connect("prediction_logs.db")
-    c = conn.cursor()
-    c.execute("SELECT * FROM logs ORDER BY id DESC")
-    rows = c.fetchall()
-    conn.close()
-    return jsonify(rows)
-"""""
+
 @app.route('/logs_table')
 def logs_table():
     conn = sqlite3.connect("prediction_logs.db")

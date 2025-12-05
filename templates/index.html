@@ -201,7 +201,9 @@ window.onload = updateFields;
 </script>
 
 <script>
+
 function predict() {
+
     let formData = new FormData(document.getElementById("disease-form"));
 
     fetch("/predict", {
@@ -210,14 +212,20 @@ function predict() {
     })
     .then(response => response.json())
     .then(data => {
+
         document.getElementById("result-box").innerHTML = `
             <h3>${data.result}</h3>
             <p><strong>Probability:</strong> ${(data.prob * 100).toFixed(2)}%</p>
+
+            <a href="/logs_table" target="_blank" class="log-link">
+                View Prediction Logs
+            </a>
         `;
     })
     .catch(err => {
-        document.getElementById("result-box").innerHTML = "<p style='color:red;'>Error occurred!</p>";
         console.error(err);
+        document.getElementById("result-box").innerHTML =
+            "<p style='color:red;'>Error occurred!</p>";
     });
 }
 </script>
